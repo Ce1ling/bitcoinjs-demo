@@ -17,21 +17,6 @@ importers:
       tiny-secp256k1:
         specifier: 2.2.3
         version: 2.2.3
-
-  packages/brc20:
-    dependencies:
-      '@sadoprotocol/ordit-sdk':
-        specifier: 2.7.4
-        version: 2.7.4
-      bitcoinjs-lib:
-        specifier: 6.1.6
-        version: 6.1.6
-      ecpair:
-        specifier: 2.1.0
-        version: 2.1.0
-      tiny-secp256k1:
-        specifier: 2.2.3
-        version: 2.2.3
     devDependencies:
       '@jest/globals':
         specifier: 29.7.0
@@ -45,6 +30,21 @@ importers:
       tsx:
         specifier: ^4.19.2
         version: 4.19.2
+
+  packages/brc20:
+    dependencies:
+      '@sadoprotocol/ordit-sdk':
+        specifier: ^2.7.4
+        version: 2.7.4
+      bitcoinjs-demo:
+        specifier: workspace:*
+        version: link:../..
+
+  packages/rbf:
+    dependencies:
+      bitcoinjs-demo:
+        specifier: workspace:*
+        version: link:../..
 
 packages:
 

@@ -1,13 +1,14 @@
 import * as bitcoin from 'bitcoinjs-lib'
 import * as ecpair from 'ecpair'
 import * as ecc from 'tiny-secp256k1'
+import { toXOnly } from 'bitcoinjs-lib/src/psbt/bip371'
 
 const MAXIMUM_SCRIPT_ELEMENT_SIZE = 520
 
 bitcoin.initEccLib(ecc)
 const ECPair = ecpair.ECPairFactory(ecc)
 
-export { bitcoin, ecpair, ecc, ECPair }
+export { bitcoin, ecpair, ecc, ECPair, toXOnly }
 
 export function OP_PUSH(data: number | string | Buffer) {
   if (typeof data === 'number') return data

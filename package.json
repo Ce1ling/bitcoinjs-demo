@@ -1,17 +1,31 @@
 {
   "name": "bitcoinjs-demo",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:brc20": "jest --testPathPattern=brc20",
+    "test:rbf": "jest --testPathPattern=rbf"
   },
   "keywords": [],
   "author": "Ce1ling",
   "license": "MIT",
   "description": "",
+  "workspaces": [
+    "packages/*"
+  ],
   "dependencies": {
     "bitcoinjs-lib": "6.1.6",
     "ecpair": "2.1.0",
     "tiny-secp256k1": "2.2.3"
+  },
+  "devDependencies": {
+    "@jest/globals": "29.7.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "tsx": "^4.19.2"
+  },
+  "exports": {
+    ".": "./src/index.ts"
   }
 }
