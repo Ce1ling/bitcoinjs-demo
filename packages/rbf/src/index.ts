@@ -16,6 +16,7 @@ interface UTXO {
   value: number
 }
 
+// TODO: feeRate is the rate per bytes, not the total fee for the transaction.
 export class RBF {
   network!: Options['network']
   wif!: Options['wif']
@@ -28,6 +29,7 @@ export class RBF {
   payment: bitcoin.Payment
 
   constructor(opts: Options) {
+    // TODO: Check `replaceFeeRate`, must be higher than the `feeRate`
     Object.assign(this, opts)
     this.keypair = ECPair.fromWIF(this.wif, bitcoin.networks[this.network])
     this.payment = bitcoin.payments.p2tr({
