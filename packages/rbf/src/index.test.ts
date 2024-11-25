@@ -16,6 +16,25 @@ describe('RBF', () => {
     },
   })
 
+  test('should throw an error if `replaceFeeRate` is not higher than `feeRate`', () => {
+    expect(
+      () =>
+        new RBF({
+          network: 'testnet',
+          wif: '',
+          toAddress: '',
+          amount: 0,
+          feeRate: 154,
+          replaceFeeRate: 154,
+          utxo: {
+            txid: '',
+            vout: 0,
+            value: 0,
+          },
+        })
+    ).toThrow('`replaceFeeRate` must be higher than `feeRate`')
+  })
+
   // https://mempool.space/testnet/tx/5b7b41c661dd42fdb880331a8ce0a079f8b99e9289459248dcaada5174712a9f
   test('should be init tx hex', () => {
     const tx = rbf.initTx()
