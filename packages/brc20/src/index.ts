@@ -49,17 +49,17 @@ export class BRC20 {
   enableRbf: Options['enableRbf']
   autoAdjustment: Options['autoAdjustment']
 
-  payment: bitcoin.Payment
+  payment!: bitcoin.Payment
   taprootTree: [Tapleaf, Tapleaf] | [] = []
-  inscriptionScript: Buffer
-  recoveryScript: Buffer
-  redeem: { output: Buffer; redeemVersion: number }
-  fee: number
+  inscriptionScript!: Buffer
+  recoveryScript!: Buffer
+  redeem!: { output: Buffer; redeemVersion: number }
+  fee: number = 0
 
-  psbt: bitcoin.Psbt
-  utxo: UTXORequired
-  inputs: InputType[]
-  outputs: Output[]
+  psbt!: bitcoin.Psbt
+  utxo!: UTXORequired
+  inputs: InputType[] = []
+  outputs: Output[] = []
 
   inputAmount: number = 0
   outputAmount: number = 0
