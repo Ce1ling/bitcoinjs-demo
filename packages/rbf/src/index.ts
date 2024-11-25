@@ -3,11 +3,18 @@ import { ECPairInterface } from 'ecpair'
 
 interface Options {
   network: keyof typeof bitcoin.networks
+  // Sender wallet import format
   wif: string
+  // Receiver address
   toAddress: string
-  sats: number
+  // Send amount
+  amount: number
+  // Initial fee rate
   feeRate: number
+  // Fee rate for replacing the transaction
   replaceFeeRate: number
+  // UTXO to be spent
+  utxo: UTXO
 }
 
 interface UTXO {
@@ -21,9 +28,10 @@ export class RBF {
   network!: Options['network']
   wif!: Options['wif']
   toAddress!: Options['toAddress']
-  sats!: Options['sats']
+  amount!: Options['amount']
   feeRate!: Options['feeRate']
   replaceFeeRate!: Options['replaceFeeRate']
+  utxo!: Options['utxo']
 
   keypair: ECPairInterface
   payment: bitcoin.Payment
@@ -48,36 +56,33 @@ export class RBF {
     )
   }
 
-  private createPsbt() {
-    return new bitcoin.Psbt({
+  private createTransaction(feeRate: number) {
+    const psbt = new bitcoin.Psbt({
       network: bitcoin.networks[this.network],
     })
-  }
 
-  sendTx(utxo: UTXO) {
-    const psbt = this.createPsbt()
-    psbt.setMaximumFeeRate(this.feeRate)
+    psbt.setMaximumFeeRate(feeRate)
     psbt
       .addInput({
-        hash: utxo.txid,
-        index: utxo.vout,
+        hash: this.utxo.txid,
+        index: this.utxo.vout,
         witnessUtxo: {
-          value: utxo.value,
+          value: this.utxo.value,
           script: this.payment.output!,
         },
         tapInternalKey: this.xPubkey,
       })
       .addOutput({
         address: this.toAddress,
-        value: this.sats,
+        value: this.amount,
       })
       // Change output
       .addOutput({
         address: this.payment.address!,
-        value: utxo.value - this.sats - this.feeRate,
+        value: this.utxo.value - this.amount - feeRate,
       })
-    // enable RBF
-    psbt.setInputSequence(0, 0xfffffffd)
+      // Enable RBF
+      .setInputSequence(0, 0xfffffffd)
 
     return psbt
       .signAllInputs(this.tweakSigner)
@@ -85,35 +90,11 @@ export class RBF {
       .extractTransaction()
   }
 
-  replaceTx(utxo: UTXO) {
-    const psbt = this.createPsbt()
+  sendTx() {
+    return this.createTransaction(this.feeRate)
+  }
 
-    psbt.setMaximumFeeRate(this.replaceFeeRate)
-    psbt
-      .addInput({
-        hash: utxo.txid,
-        index: utxo.vout,
-        witnessUtxo: {
-          value: utxo.value,
-          script: this.payment.output!,
-        },
-        tapInternalKey: this.xPubkey,
-      })
-      .addOutput({
-        address: this.toAddress,
-        value: this.sats,
-      })
-      // Change output
-      .addOutput({
-        address: this.payment.address!,
-        value: utxo.value - this.sats - this.replaceFeeRate,
-      })
-    // enable RBF
-    psbt.setInputSequence(0, 0xfffffffd)
-
-    return psbt
-      .signAllInputs(this.tweakSigner)
-      .finalizeAllInputs()
-      .extractTransaction()
+  replaceTx() {
+    return this.createTransaction(this.replaceFeeRate)
   }
 }
