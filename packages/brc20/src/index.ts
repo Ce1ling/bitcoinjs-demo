@@ -1,4 +1,3 @@
-import { getVirtualSize } from './utils/fee'
 import {
   getDummyP2TRInput,
   toXOnly,
@@ -11,14 +10,14 @@ import {
   MAXIMUM_FEE,
   MINIMUM_AMOUNT_IN_SATS,
 } from '@sadoprotocol/ordit-sdk/dist/constants'
-import type { Network } from '@sadoprotocol/ordit-sdk/dist/config/types'
+import { bitcoin } from 'bitcoinjs-demo'
 
-import { bitcoin } from './lib/bitcoinjs'
 import { createInscriptionScript, createRecoveryScript } from './utils/witness'
+import { getVirtualSize } from './utils/fee'
 
 interface Options {
   // 需要交互的网络
-  network: Network
+  network: keyof typeof bitcoin.networks
   // BRC20 的类型, `text/plain`, `application/json` 等
   type: string
   // BRC20 的具体内容, 比如 `JSON.stringify({ p: 'brc-20', op: 'deploy', ticker: 'BRCD' })`
@@ -40,18 +39,18 @@ interface Options {
 type UTXORequired = Pick<UTXO, 'txid' | 'n' | 'sats'>
 
 export class BRC20 {
-  network: Options['network']
-  type: Options['type']
-  content: Options['content']
-  fromPubkey: Options['fromPubkey']
-  toAddress: Options['toAddress']
-  postage: Options['postage']
-  feeRate: Options['feeRate']
+  network!: Options['network']
+  type!: Options['type']
+  content!: Options['content']
+  fromPubkey!: Options['fromPubkey']
+  toAddress!: Options['toAddress']
+  postage!: Options['postage']
+  feeRate!: Options['feeRate']
   enableRbf: Options['enableRbf']
   autoAdjustment: Options['autoAdjustment']
 
   payment: bitcoin.Payment
-  taprootTree: [Tapleaf, Tapleaf]
+  taprootTree: [Tapleaf, Tapleaf] | [] = []
   inscriptionScript: Buffer
   recoveryScript: Buffer
   redeem: { output: Buffer; redeemVersion: number }
@@ -208,7 +207,11 @@ export class BRC20 {
 
   // 创建并计算整个 PSBT 的网络费用
   private createNetworkFee() {
-    const vSize = getVirtualSize(this.psbt, this.network, this.payment.witness)
+    const vSize = getVirtualSize(
+      this.psbt,
+      this.network === 'bitcoin' ? 'mainnet' : this.network,
+      this.payment.witness
+    )
     const networkFee = vSize * this.feeRate
     if (networkFee > MAXIMUM_FEE) {
       throw new Error(
