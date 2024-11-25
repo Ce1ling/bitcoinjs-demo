@@ -37,7 +37,10 @@ export class RBF {
   payment: bitcoin.Payment
 
   constructor(opts: Options) {
-    // TODO: Check `replaceFeeRate`, must be higher than the `feeRate`
+    if (opts.replaceFeeRate <= opts.feeRate) {
+      throw new Error('`replaceFeeRate` must be higher than `feeRate`')
+    }
+
     Object.assign(this, opts)
     this.keypair = ECPair.fromWIF(this.wif, bitcoin.networks[this.network])
     this.payment = bitcoin.payments.p2tr({
@@ -90,7 +93,7 @@ export class RBF {
       .extractTransaction()
   }
 
-  sendTx() {
+  initTx() {
     return this.createTransaction(this.feeRate)
   }
 
