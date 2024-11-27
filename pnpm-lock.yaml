@@ -40,6 +40,12 @@ importers:
         specifier: workspace:*
         version: link:../..
 
+  packages/join-utxo:
+    dependencies:
+      bitcoinjs-demo:
+        specifier: workspace:*
+        version: link:../..
+
   packages/rbf:
     dependencies:
       bitcoinjs-demo:

@@ -6,7 +6,8 @@
     "test": "jest",
     "test:brc20": "jest --testPathPattern=brc20",
     "test:rbf": "jest --testPathPattern=rbf",
-    "test:split-utxo": "jest --testPathPattern=split-utxo"
+    "test:split-utxo": "jest --testPathPattern=split-utxo",
+    "test:join-utxo": "jest --testPathPattern=join-utxo"
   },
   "keywords": [],
   "author": "Ce1ling",
