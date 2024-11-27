@@ -1,5 +1,5 @@
 export interface UTXO {
-  txid: string
-  vout: number
+  hash: string
+  index: number
   value: number
 }

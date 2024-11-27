@@ -1,4 +1,4 @@
-import { bitcoin, ECPair, toXOnly } from 'bitcoinjs-demo'
+import { bitcoin, ECPair, toXOnly, UTXO } from 'bitcoinjs-demo'
 import { ECPairInterface } from 'ecpair'
 
 interface Options {
@@ -15,12 +15,6 @@ interface Options {
   replaceFeeRate: number
   // UTXO to be spent
   utxo: UTXO
-}
-
-interface UTXO {
-  txid: string
-  vout: number
-  value: number
 }
 
 // TODO: feeRate is the rate per bytes, not the total fee for the transaction.
@@ -67,8 +61,8 @@ export class RBF {
     psbt.setMaximumFeeRate(feeRate)
     psbt
       .addInput({
-        hash: this.utxo.txid,
-        index: this.utxo.vout,
+        hash: this.utxo.hash,
+        index: this.utxo.index,
         witnessUtxo: {
           value: this.utxo.value,
           script: this.payment.output!,

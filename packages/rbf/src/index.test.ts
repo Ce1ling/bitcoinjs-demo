@@ -10,8 +10,8 @@ describe('RBF', () => {
     feeRate: 154,
     replaceFeeRate: 300 * 154,
     utxo: {
-      txid: '41888bb05d3e40d31f8ed686df50cf6679af792e6cd0e76056685461802201c0',
-      vout: 1,
+      hash: '41888bb05d3e40d31f8ed686df50cf6679af792e6cd0e76056685461802201c0',
+      index: 1,
       value: 687446,
     },
   })
@@ -27,8 +27,8 @@ describe('RBF', () => {
           feeRate: 154,
           replaceFeeRate: 154,
           utxo: {
-            txid: '',
-            vout: 0,
+            hash: '',
+            index: 0,
             value: 0,
           },
         })
