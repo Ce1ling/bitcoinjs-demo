@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "test:brc20": "jest --testPathPattern=brc20",
-    "test:rbf": "jest --testPathPattern=rbf"
+    "test:rbf": "jest --testPathPattern=rbf",
+    "test:split-utxo": "jest --testPathPattern=split-utxo"
   },
   "keywords": [],
   "author": "Ce1ling",
