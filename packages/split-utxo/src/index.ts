@@ -56,6 +56,15 @@ export class SplitUtxo {
       )
     }
 
+    const satsPerOutput = Math.floor(totalValue / n)
+    if (satsPerOutput <= 546) {
+      throw new Error(
+        `Too many splits, each output is less than 546. Max: ${Math.floor(
+          totalValue / 546
+        )} outputs.`
+      )
+    }
+
     psbt.addInput({
       hash: this.utxo.hash,
       index: this.utxo.index,
@@ -72,7 +81,7 @@ export class SplitUtxo {
     for (let i = 0; i < n; i++) {
       psbt.addOutput({
         address: this.payment.address!,
-        value: Math.floor(totalValue / n),
+        value: satsPerOutput,
       })
     }
 
