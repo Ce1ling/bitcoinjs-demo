@@ -13,7 +13,6 @@ export { bitcoin, ecpair, ecc, ECPair, toXOnly }
 export function OP_PUSH(data: number | string | Buffer) {
   if (typeof data === 'number') return data
   const buff = Buffer.isBuffer(data) ? data : Buffer.from(data, 'utf8')
-  // 不能超过最大允许字节数
   if (buff.byteLength > MAXIMUM_SCRIPT_ELEMENT_SIZE) {
     throw new Error('Data is too large to push.')
   }

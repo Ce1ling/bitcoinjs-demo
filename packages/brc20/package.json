@@ -1,7 +1,7 @@
 {
   "name": "@bitcoinjs-demo/brc20",
   "version": "1.0.0",
-  "main": "src/index.ts",
+  "main": "./src/index.ts",
   "scripts": {
     "test": "jest"
   },
@@ -10,7 +10,6 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "bitcoinjs-demo": "workspace:*",
-    "@sadoprotocol/ordit-sdk": "^2.7.4"
+    "bitcoinjs-demo": "workspace:*"
   }
 }
