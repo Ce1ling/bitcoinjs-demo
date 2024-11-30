@@ -47,7 +47,7 @@ export class RBF {
     return toXOnly(this.keypair.publicKey)
   }
 
-  get tweakSigner() {
+  get tweakedXPubkey() {
     return this.keypair.tweak(
       bitcoin.crypto.taggedHash('TapTweak', this.xPubkey)
     )
@@ -56,18 +56,18 @@ export class RBF {
   private createTransaction(feeRate: number) {
     const psbt = new bitcoin.Psbt({
       network: bitcoin.networks[this.network],
+      maximumFeeRate: feeRate,
     })
 
-    psbt.setMaximumFeeRate(feeRate)
     psbt
       .addInput({
         hash: this.utxo.hash,
         index: this.utxo.index,
+        tapInternalKey: this.xPubkey,
         witnessUtxo: {
           value: this.utxo.value,
           script: this.payment.output!,
         },
-        tapInternalKey: this.xPubkey,
       })
       .addOutput({
         address: this.toAddress,
@@ -82,7 +82,7 @@ export class RBF {
       .setInputSequence(0, 0xfffffffd)
 
     return psbt
-      .signAllInputs(this.tweakSigner)
+      .signAllInputs(this.tweakedXPubkey)
       .finalizeAllInputs()
       .extractTransaction()
   }
