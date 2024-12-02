@@ -1,9 +1,9 @@
 import { describe, test, expect } from '@jest/globals'
 
-import { JoinUtxo } from '.'
+import { JoinUtxos } from '.'
 
 describe('JoinUtxo', () => {
-  const utxo = new JoinUtxo({
+  const utxo = new JoinUtxos({
     wif: 'cP5qpxwUrhB2pfGELF9NSfP16hUtMAithVmasdc6UeYLTMxWHteR',
     network: 'testnet',
     feeRate: 226,

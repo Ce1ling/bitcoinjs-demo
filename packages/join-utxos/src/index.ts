@@ -8,7 +8,7 @@ interface Options {
   utxos: UTXO[]
 }
 
-export class JoinUtxo {
+export class JoinUtxos {
   wif!: Options['wif']
   network!: Options['network']
   feeRate!: Options['feeRate']
