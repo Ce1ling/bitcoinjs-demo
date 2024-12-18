@@ -1,0 +1,15 @@
+{
+  "name": "@bitcoinjs-demo/to-be-replace",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Ce1ling",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "bitcoinjs-demo": "workspace:*"
+  }
+}
