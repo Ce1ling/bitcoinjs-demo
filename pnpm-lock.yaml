@@ -39,14 +39,26 @@ importers:
       '@bitcoinjs-demo/core':
         specifier: workspace:*
         version: link:../core
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
 
-  packages/core: {}
+  packages/core:
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
 
   packages/join-utxos:
     dependencies:
       '@bitcoinjs-demo/core':
         specifier: workspace:*
         version: link:../core
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
 
   packages/rbf:
     dependencies:
@@ -69,6 +81,10 @@ importers:
       '@bitcoinjs-demo/core':
         specifier: workspace:*
         version: link:../core
+    devDependencies:
+      tsx:
+        specifier: ^4.19.2
+        version: 4.19.2
 
 packages:
 
