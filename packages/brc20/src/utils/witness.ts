@@ -1,6 +1,5 @@
 import { MAXIMUM_SCRIPT_ELEMENT_SIZE } from '@sadoprotocol/ordit-sdk/dist/constants'
-
-import { bitcoin, OP_PUSH } from '../lib/bitcoinjs'
+import { bitcoin, OP_PUSH } from 'bitcoinjs-demo'
 
 export const createBrc20BaseElements = (
   chunks: Buffer | bitcoin.payments.Stack,
