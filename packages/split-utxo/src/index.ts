@@ -1,4 +1,4 @@
-import { bitcoin, ECPair, toXOnly, type UTXO } from 'bitcoinjs-demo'
+import { bitcoin, ECPair, toXOnly, type UTXO } from '@bitcoinjs-demo/core'
 import { ECPairInterface } from 'ecpair'
 
 interface Options {

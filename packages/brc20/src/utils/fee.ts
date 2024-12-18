@@ -1,6 +1,6 @@
 import { AddressFormats, getScriptType } from '@sadoprotocol/ordit-sdk'
 import type { Network } from '@sadoprotocol/ordit-sdk/dist/config/types'
-import { bitcoin } from 'bitcoinjs-demo'
+import { bitcoin } from '@bitcoinjs-demo/core'
 
 export const getVirtualSize = (
   psbt: bitcoin.Psbt,

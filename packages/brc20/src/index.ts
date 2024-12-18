@@ -10,7 +10,7 @@ import {
   MAXIMUM_FEE,
   MINIMUM_AMOUNT_IN_SATS,
 } from '@sadoprotocol/ordit-sdk/dist/constants'
-import { bitcoin } from 'bitcoinjs-demo'
+import { bitcoin } from '@bitcoinjs-demo/core'
 
 import { createInscriptionScript, createRecoveryScript } from './utils/witness'
 import { getVirtualSize } from './utils/fee'

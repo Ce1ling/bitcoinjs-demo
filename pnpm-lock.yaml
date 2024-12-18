@@ -36,27 +36,29 @@ importers:
 
   packages/brc20:
     dependencies:
-      bitcoinjs-demo:
+      '@bitcoinjs-demo/core':
         specifier: workspace:*
-        version: link:../..
+        version: link:../core
 
-  packages/join-utxo:
+  packages/core: {}
+
+  packages/join-utxos:
     dependencies:
-      bitcoinjs-demo:
+      '@bitcoinjs-demo/core':
         specifier: workspace:*
-        version: link:../..
+        version: link:../core
 
   packages/rbf:
     dependencies:
-      bitcoinjs-demo:
+      '@bitcoinjs-demo/core':
         specifier: workspace:*
-        version: link:../..
+        version: link:../core
 
   packages/split-utxo:
     dependencies:
-      bitcoinjs-demo:
+      '@bitcoinjs-demo/core':
         specifier: workspace:*
-        version: link:../..
+        version: link:../core
 
 packages:
 

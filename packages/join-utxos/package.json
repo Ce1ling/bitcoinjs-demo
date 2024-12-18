@@ -10,6 +10,6 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "bitcoinjs-demo": "workspace:*"
+    "@bitcoinjs-demo/core": "workspace:*"
   }
 }
