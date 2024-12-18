@@ -1,4 +1,4 @@
-const main = async () => {
+export const main = async () => {
   console.log('Hello World')
 }
 
