@@ -21,7 +21,8 @@
     "@sadoprotocol/ordit-sdk": "^2.7.4",
     "bitcoinjs-lib": "6.1.6",
     "ecpair": "2.1.0",
-    "tiny-secp256k1": "2.2.3"
+    "tiny-secp256k1": "2.2.3",
+    "@unisat/wallet-sdk": "^1.8.0"
   },
   "devDependencies": {
     "@jest/globals": "29.7.0",

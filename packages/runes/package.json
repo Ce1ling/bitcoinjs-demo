@@ -1,0 +1,19 @@
+{
+  "name": "@bitcoinjs-demo/runes",
+  "version": "1.0.0",
+  "main": "./src/index.ts",
+  "scripts": {
+    "dev": "tsx ./src/index.ts",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "Ce1ling",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@bitcoinjs-demo/core": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2"
+  }
+}
